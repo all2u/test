@@ -1,5 +1,5 @@
 import Point
-# import java.util.LinkedList;
+import collections
 import Queue
 
 
@@ -38,10 +38,10 @@ class BFS:
 		if not self.isFree(maze, dst.x, dst.y):
 			return None
 
-		self.Queue(q) = new LinkedList<Node>();
-		maze = Utils.copyGrid(maze);
-		maze[src.x][src.y] = true;
-		q.add(new Node(src.x, src.y, null));
+		self.q = collections.deque()
+		maze = maze.copy()
+		maze[src.x][src.y] = True
+		self.q.add(Node(src.x, src.y, None))
 
 		while (!q.isEmpty()) {
 			Node p = q.remove();
@@ -75,6 +75,6 @@ class BFS:
 		return None
 	
 	def isFree(self, maze, x, y):
-		if ((x >= 0 && x < maze.length) && (y >= 0 && y < maze[x].length) && !maze[x][y]):
+		if ((x >= 0 and x < maze.length) and (y >= 0 and y < maze[x].length) and not maze[x][y]):
 			return True
 		return False
