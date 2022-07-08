@@ -362,11 +362,10 @@ background = background.convert()
 background.fill(background_colour)
 
 
-x0 = "1.65 0.42"
-x1 = "0.66 0.42"
-x2 = "-1.4 0"
-r = "0.64 0.2\
-    0.66 0.13"
+x0 = "0.34 1"
+x1 = "0.66 0.13"
+x2 = "0.24 -0.64"
+
 
 x_0, y_0 = [float(i)*100 for i in x0.split()]
 x_1, y_1 = [float(i)*100 for i in x1.split()]
@@ -395,7 +394,7 @@ print(p0.angle)
 
 font = pygame.font.Font(None, 32)
 clock = pygame.time.Clock()
-radius = 30.75*2
+radius = 3.075
 
 running = True
 moving = False
@@ -427,13 +426,15 @@ while running:
     if moving:
         if collide:
             p1.speed,p1.angle = p0.speed,p0.angle
+            p0.speed = 0
             collide = False
         else:
             p0.move()
-            if p1.x-radius <= p0.x <= p1.x+radius and p1.y-radius <= p0.y <= p1.y+radius:
+            p1.move()
+            if p0.x-radius <= p1.x <= p0.x+radius and p0.y-radius <= p1.y <= p0.y+radius:
                 print("Collision")
                 collide = True
-        p1.move()
+        
     center.display()
     p0.display()
     p1.display()
@@ -441,5 +442,5 @@ while running:
     pygame.display.flip()
     x0_f, y0_f = p0.x/100, p0.y/100
     x1_f, y1_f = p1.x/100, p1.y/100
-print(f"{x0_f} {y0_f}")
+print(f"{x0_f:.2f} {y0_f}")
 print(f"{x1_f} {y1_f}")
